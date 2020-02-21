@@ -17,7 +17,7 @@ export default function Appointment(props) {
     props.interview ? v.SHOW : v.EMPTY
   );
 
-  // CREATE NEW APPOINTMENT -- Throw error for empty input fields 
+  // CREATE NEW APPOINTMENT -- Display error for empty input field
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -60,7 +60,7 @@ export default function Appointment(props) {
   return (
   <article className="appointment">
     <Header time={props.time} />  
-    {mode === v.EMPTY && <Empty onAdd={() => transition(v.CREATE)} />}
+    {mode === v.EMPTY && (<Empty onAdd={() => transition(v.CREATE)} />)}
     {mode === v.SHOW && (
     <Show
       student={props.interview.student}
@@ -88,49 +88,48 @@ export default function Appointment(props) {
       name={props.interview.student}
       onCancel = {() => transition(v.SHOW)}
     />
-    )}
-  
+    )};
     {mode === v.DELETING && (
     <Status
       message='Deleting'
     />
-    )}
+    )};
     {mode === v.CONFIRM && (
     <Confirm
       message='Are you really bout dis'
       onCancel={() => back()}
       onConfirm={cancel}
     />
-    )}
+    )};
     {mode === v.UPDATING && (
     <Status
       message='Updating..'
     />
-    )}
+    )};
     {mode === v.ERROR_UPDATE && (
     <Error
       message='Error during save'
       onClose={() => transition(v.SHOW)}
     />
-    )}
+    )};
     {mode === v.ERROR_SAVING && (
     <Error
       message='Error during save'
       onClose={() => back()}
     />
-    )}
+    )};
     {mode === v.EMPTY_SAVING && (
     <Error
       message='Error: you need to fill out all fields!'
       onClose={() => back()}
     />
-    )}
+    )};
     {mode === v.ERROR_DELETING && (
     <Error
       message='Error during delete'
       onClose={() => transition(v.SHOW)}
     />
-    )}
+    )};
   
   </article>
   );
@@ -139,4 +138,3 @@ export default function Appointment(props) {
 
 
 
-// {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty />}
