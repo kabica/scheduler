@@ -17,19 +17,20 @@ export default function Appointment(props) {
     props.interview ? v.SHOW : v.EMPTY
   );
 
-  // CREATE NEW APPOINTMENT 
+  // CREATE NEW APPOINTMENT -- Throw error for empty input fields 
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    transition(v.SAVING);
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(v.SHOW))
-      .catch(() =>
-        transition(v.ERROR_SAVING, true)
-    )
+    if(name && interviewer) {
+      transition(v.SAVING);
+      props
+        .bookInterview(props.id, interview)
+        .then(() => transition(v.SHOW))
+        .catch(() =>
+          transition(v.ERROR_SAVING, true))
+    } else {transition(v.EMPTY_SAVING, true)}
   };
 
   // REMOVE AN ALREADY EXISTING APPOINTMENT
@@ -115,6 +116,12 @@ export default function Appointment(props) {
     {mode === v.ERROR_SAVING && (
     <Error
       message='Error during save'
+      onClose={() => back()}
+    />
+    )}
+    {mode === v.EMPTY_SAVING && (
+    <Error
+      message='Error: you need to fill out all fields!'
       onClose={() => back()}
     />
     )}

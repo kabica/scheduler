@@ -14,7 +14,7 @@ const SET_DAY = "SET_DAY";
 const SET_APPLICATION = "SET_APPLICATION";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
-function reducer(state, action) {
+const reducer = function(state, action) {
   switch (action.type) {
     case SET_DAY:
       return { ...state, ...action.value  }
@@ -33,20 +33,17 @@ function reducer(state, action) {
 export default function useApplicationData() {
 
 const [state, dispatch] = useReducer(reducer, initial);
-
 function setDay (day) {
   dispatch({ type: SET_DAY, value: {day} });
-} 
-
-function setApp (days, appointments, interviewers) {
-  dispatch({ type: SET_APPLICATION, value: { days, appointments, interviewers} });
-} 
-
+}; 
 function setInterview (appointments, days) {
   dispatch({ type: SET_INTERVIEW, value: { appointments, days} });
-} 
+}; 
+function setApp (days, appointments, interviewers) {
+  dispatch({ type: SET_APPLICATION, value: { days, appointments, interviewers} });
+}; 
 
-
+// RESPONSIBLE FOR INITIAL STATE UPDATE ON SERVER LOAD 
 useEffect(() => {
   const promise1 = axios.get("/api/days");
   const promise2 = axios.get("/api/appointments");
@@ -64,7 +61,7 @@ useEffect(() => {
     setApp(days, appointments, interviewers)});
 }, []);
 
-// 
+// USE STATE.DAY DEFAULT VALUE (above) TO GET TODAY OBJECT
 const getToday = function (today, days) {
 for( const day of days) {
   if(day.name === today){
@@ -73,6 +70,7 @@ for( const day of days) {
 }
 };
 
+// SAVE NEW INTERVIEW TO DB - POPULATE APPOINTMENT OBJECT 
 const bookInterview = function(id, interview) {
   const appointment = {
     ...state.appointments[id],
@@ -108,12 +106,13 @@ const cancelInterview = function (ID) {
     [ID]: appointment
   };
 
-  const dayId = getToday(state.day, state.days);
+  const dayID = getToday(state.day, state.days);
   const day = {
-    ...state.days[dayId],
-    spots: state.days[dayId]['spots'] + 1
+    ...state.days[dayID],
+    spots: state.days[dayID]['spots'] + 1
   }
-  state.days[dayId] = day;
+  state.days[dayID] = day;
+
   const days = [...state.days]
 
   return Promise.resolve(axios.delete(`/api/appointments/${ID}`)
