@@ -1,28 +1,36 @@
-import { useEffect, useState } from "react";
-const axios = require('axios');
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
-export default function useApplicationData () {
+const useApplicationData = () => {
   let today = new Date();
   const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const setDay = day => setState(prev => ({ ...prev, day }));
 
-    const [state, setState] = useState({
+  const [state, setState] = useState({
     day: week[ today.getDay() ],
     days: [],
     appointments: {},
     interviewers: {}
   });
-    useEffect(() => {
-    let URL1 = "/api/days"
-    let URL2 = "api/appointments"
-    let URL3 = "api/interviewers"
-    const promise1 = axios.get(URL1);
-    const promise2 = axios.get(URL2);
-    const promise3 = axios.get(URL3);
 
-    Promise.all([promise1, promise2, promise3]).then(results => {
-      setState(prev => (
-        { day: state.day, days: results[0].data, appointments: results[1].data, interviewers: results[2].data}))
-  })}, []);
+  useEffect(() => {
+    const promise1 = axios.get("/api/days");
+    const promise2 = axios.get("/api/appointments");
+    const promise3 = axios.get("/api/interviewers");
+
+    Promise.all([
+      Promise.resolve(promise1),
+      Promise.resolve(promise2),
+      Promise.resolve(promise3),
+    ]).then((all) => {
+      
+      const [days, appointments, interviewer] = all;
+      
+      setState(prev => ({ day: state.day, days: days.data, appointments: appointments.data, interviewers: interviewer.data}))
+    });
+  }, []);
+
+ 
 
   function bookInterview(id, interview) {
     console.log(id, interview);
@@ -41,6 +49,7 @@ export default function useApplicationData () {
           ...state,
           appointments
         })
+
       )
       )
     };
@@ -65,4 +74,9 @@ export default function useApplicationData () {
         )
         )
     };
+
+
+  return { state, setDay, bookInterview, cancelInterview };
 }
+ 
+export default useApplicationData;

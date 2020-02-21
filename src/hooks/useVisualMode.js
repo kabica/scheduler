@@ -14,6 +14,16 @@ export default function useVisualMode(initial) {
     const modeIndex = history.indexOf(mode) - 1;
     (history.length === 1) ? setMode(mode) : setMode(history[modeIndex])
   }
+  // function back() { 
+  //   if (history.length === 1) {
+  //     setMode(history[0]);
+  //   } else {
+  //     const popHistory = [...history];
+  //     popHistory.pop();
+  //     setMode(popHistory[popHistory.length - 1]);
+  //     setHistory(prev => ([...prev]));
+  //   }
+  // }
 
   return { mode, transition, back };
 };
