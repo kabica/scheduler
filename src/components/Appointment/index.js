@@ -85,7 +85,7 @@ export default function Appointment(props) {
       onSave={update}
       interviewers={props.interviewers}
       name={props.interview.student}
-      onCancel = {() => back()}
+      onCancel = {() => transition(v.SHOW)}
     />
     )}
   
