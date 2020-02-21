@@ -1,100 +1,86 @@
 import React from "react";
 import "components/Appointment/styles.scss";
-import Empty from 'components/Appointment/Empty';
 import Show from 'components/Appointment/Show';
-import Header from 'components/Appointment/Header';
 import Form from 'components/Appointment/Form';
-import Status from 'components/Appointment/Status';
-import Confirm from 'components/Appointment/Confirm';
-import Error from 'components/Appointment/Error';
 import Edit from 'components/Appointment/Edit';
 import useVisualMode from "hooks/useVisualMode";
+import Empty from 'components/Appointment/Empty';
+import Error from 'components/Appointment/Error';
+import Header from 'components/Appointment/Header';
+import Status from 'components/Appointment/Status';
+import Confirm from 'components/Appointment/Confirm';
+const { v } = require('../helpers/xView.js');
 
-const EMPTY = 'EMPTY';
-const SHOW = 'SHOW';
-const CREATE = 'CREATE';
-const SAVING = 'SAVING';
-const ERROR_SAVING = 'ERROR_SAVING';
-const CONFIRM = 'CONFIRM'
-const DELETING = 'DELETING';
-const ERROR_DELETING = 'ERROR_DELETING';
-const EDIT = 'EDIT'
-const UPDATING = 'UPDATING'
-const ERROR_UPDATE = 'ERROR_UPDATE'
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
+    props.interview ? v.SHOW : v.EMPTY
   );
 
-  
+  // CREATE NEW APPOINTMENT 
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    transition(SAVING);
+    transition(v.SAVING);
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      .then(() => transition(v.SHOW))
       .catch(() =>
-        transition(ERROR_SAVING, true)
+        transition(v.ERROR_SAVING, true)
     )
   };
 
-  // async function setSaveMode (mode) {
-  //   await asyncTransition(mode)
-  // }
-
+  // REMOVE AN ALREADY EXISTING APPOINTMENT
   function cancel() {
-    transition(DELETING, true)
+    transition(v.DELETING, true)
     props.cancelInterview(props.id)
-    .then(() => transition(EMPTY))
+    .then(() => transition(v.EMPTY))
     .catch(() =>
-      transition(ERROR_DELETING, true)
+      transition(v.ERROR_DELETING, true)
     )
+  };
 
-  }
-
+  // UPDATE AN EXISTING APPOINTMENT WITH NEW MEMBERS
   function update(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    transition(UPDATING)
+    transition(v.UPDATING)
     props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
+    .then(() => transition(v.SHOW))
     .catch(() => 
-      transition(ERROR_UPDATE)
+      transition(v.ERROR_UPDATE)
     )
-
-  }
+  };
   
   return (
   <article className="appointment">
     <Header time={props.time} />  
-    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-    {mode === SHOW && (
+    {mode === v.EMPTY && <Empty onAdd={() => transition(v.CREATE)} />}
+    {mode === v.SHOW && (
     <Show
       student={props.interview.student}
       interviewer={props.interview.interviewer}
-      onEdit={() => transition(EDIT)}
-      onDelete={() => transition(CONFIRM)}
+      onEdit={() => transition(v.EDIT)}
+      onDelete={() => transition(v.CONFIRM)}
     />
     )}
-    {mode === SAVING && (
+    {mode === v.SAVING && (
     <Status
       message='Saving'
     />
     )}
-    {mode === CREATE && (
+    {mode === v.CREATE && (
     <Form
       onSave={save}
       interviewers={props.interviewers}
       onCancel = {() => back()}
     />
     )}
-    {mode === EDIT && (
+    {mode === v.EDIT && (
     <Edit
       onSave={update}
       interviewers={props.interviewers}
@@ -103,39 +89,39 @@ export default function Appointment(props) {
     />
     )}
   
-    {mode === DELETING && (
+    {mode === v.DELETING && (
     <Status
       message='Deleting'
     />
     )}
-    {mode === CONFIRM && (
+    {mode === v.CONFIRM && (
     <Confirm
       message='Are you really bout dis'
       onCancel={() => back()}
       onConfirm={cancel}
     />
     )}
-    {mode === UPDATING && (
+    {mode === v.UPDATING && (
     <Status
       message='Updating..'
     />
     )}
-    {mode === ERROR_UPDATE && (
+    {mode === v.ERROR_UPDATE && (
     <Error
       message='Error during save'
-      onClose={() => transition(SHOW)}
+      onClose={() => transition(v.SHOW)}
     />
     )}
-    {mode === ERROR_SAVING && (
+    {mode === v.ERROR_SAVING && (
     <Error
       message='Error during save'
       onClose={() => back()}
     />
     )}
-    {mode === ERROR_DELETING && (
+    {mode === v.ERROR_DELETING && (
     <Error
       message='Error during delete'
-      onClose={() => transition(SHOW)}
+      onClose={() => transition(v.SHOW)}
     />
     )}
   
