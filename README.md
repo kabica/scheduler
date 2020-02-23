@@ -4,6 +4,11 @@ Using the latest tools and techniques, this project builds and tests a React app
 **Voila!** 
 
 ## Final Product
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+</p>
 
 ## Dependencies + Tech Specs.
 
@@ -16,7 +21,7 @@ Using the latest tools and techniques, this project builds and tests a React app
 # Getting Started
 
 - Install all dependencies (using the `npm install` command).
-- Launch Readct app (using `npm start`) and API server for persisted schedule date
+- Launch React app (using `npm start`) and API server for persisted schedule data
 - See below for further deatils :) 
 
 
