@@ -3,44 +3,53 @@ import { useState } from 'react';
 import Button from 'components/Button/Button';
 import InterviewerList from 'components/InterviewerList/InterviewerList';
 
-
+// INITIALIZE STATE OBJECT 
 export default function Form(props) {
-  const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const initial = {
+    name: '',
+    valid: false, 
+    interviewer: props.interviewer || null
+  };
+  const [state, setState] = useState({initial});
 
+  // CLEAR THE CURRENTLY SELECTED INTERVIEW FROM LIST 
   const reset = function () {
-    setName('');
-    setInterviewer(null);
-  }
+    setState({...state, valid: true, interviewer: null});
+  };
+  // CLEAR TEXT INPUT FIELD AND RESET AS ABOVE 
   const cancel = function () {
     reset();
     props.onCancel();
-  }
+  };
+
 
   return (
     <main className="appointment__card appointment__card--create">
-  <section className="appointment__card-left">
-    <form autoComplete="off">
+    <section className="appointment__card-left">
+      <form autoComplete="off">
       <input
-        className="appointment__create-input text--semi-bold"
+        className={state.valid ? "appointment__create-input text--semi-bold" : "appointment__nuhuh"}
         name="name"
-        value={name}
-        onChange={(event) => setName(event.target.value)}
+        value={state.name || ''}
+        onChange={(event) => {setState({name: event.target.value, valid: event.target.value.length ? true : false})}}
         type="text"
         placeholder="Enter Student Name"
         /*
-          This must be a controlled component
+          // THIS IS A CONTROLLED COMPONENT:
+          // value={stae.name || ''} ensures that on initial render, name is never undefined and therefore
+          // ensures that value is always a controlled component. The onChange would throw an error when value 
+          // becomes a controlled component again once a user types 
         */
       />
-    </form>
-    <InterviewerList interviewers={props.interviewers}  value={interviewer} onChange={setInterviewer} />
-  </section>
-  <section className="appointment__card-right">
-    <section className="appointment__actions">
-      <Button onClick={cancel} danger>Cancel</Button>
-      <Button onClick={() => props.onSave(name, interviewer)}confirm>Save</Button>
+      </form>
+      <InterviewerList interviewers={props.interviewers}  value={state.interviewer} onChange={(value) => setState({...state, interviewer: value})}/>
     </section>
-  </section>
-</main>
+    <section className="appointment__card-right">
+      <section className="appointment__actions">
+        <Button onClick={cancel} danger>Cancel</Button>
+        <Button onClick={state.valid && state.interviewer ? () => props.onSave(state.name, state.interviewer) : null}confirm>Save</Button>
+      </section>
+    </section>
+    </main>
   );
 };

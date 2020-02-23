@@ -3,14 +3,16 @@ import "components/Appointment/styles.scss";
 import Show from 'components/Appointment/Show';
 import Form from 'components/Appointment/Form';
 import Edit from 'components/Appointment/Edit';
-import useVisualMode from "hooks/useVisualMode";
 import Empty from 'components/Appointment/Empty';
 import Error from 'components/Appointment/Error';
 import Header from 'components/Appointment/Header';
 import Status from 'components/Appointment/Status';
 import Confirm from 'components/Appointment/Confirm';
-const { v } = require('../helpers/xView.js');
+import useVisualMode from "hooks/useVisualMode";
 
+// CONSTANTS HAVE BEEN REFACTORED TO SEPARATE FILE FOR CLEANLINESS
+// SHORT VAR NAME WAS USED (v) TO MAINTAIN READABILITY
+const { v } = require('../helpers/xView.js');
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -23,14 +25,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    if(name && interviewer) {
-      transition(v.SAVING);
-      props
-        .bookInterview(props.id, interview)
-        .then(() => transition(v.SHOW))
-        .catch(() =>
-          transition(v.ERROR_SAVING, true))
-    } else {transition(v.EMPTY_SAVING, true)}
+    transition(v.SAVING);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(v.SHOW))
+      .catch(() =>
+        transition(v.ERROR_SAVING, true)
+      );
   };
 
   // REMOVE AN ALREADY EXISTING APPOINTMENT
@@ -63,6 +64,7 @@ export default function Appointment(props) {
     {mode === v.EMPTY && (<Empty onAdd={() => transition(v.CREATE)} />)}
     {mode === v.SHOW && (
     <Show
+      error={0}
       student={props.interview.student}
       interviewer={props.interview.interviewer}
       onEdit={() => transition(v.EDIT)}
@@ -88,48 +90,56 @@ export default function Appointment(props) {
       name={props.interview.student}
       onCancel = {() => transition(v.SHOW)}
     />
-    )};
+    )}
     {mode === v.DELETING && (
     <Status
       message='Deleting'
     />
-    )};
+    )}
     {mode === v.CONFIRM && (
     <Confirm
       message='Are you really bout dis'
       onCancel={() => back()}
       onConfirm={cancel}
     />
-    )};
+    )}
     {mode === v.UPDATING && (
     <Status
       message='Updating..'
     />
-    )};
+    )}
     {mode === v.ERROR_UPDATE && (
     <Error
       message='Error during save'
       onClose={() => transition(v.SHOW)}
     />
-    )};
+    )}
     {mode === v.ERROR_SAVING && (
     <Error
       message='Error during save'
       onClose={() => back()}
     />
-    )};
+    )}
     {mode === v.EMPTY_SAVING && (
     <Error
       message='Error: you need to fill out all fields!'
       onClose={() => back()}
     />
-    )};
+    )}
     {mode === v.ERROR_DELETING && (
     <Error
       message='Error during delete'
       onClose={() => transition(v.SHOW)}
     />
-    )};
+    )}
+    {mode === v.OOPS && (
+    <Form
+      error={1}
+      onSave={save}
+      interviewers={props.interviewers}
+      onCancel = {() => back()}
+    />
+    )}
   
   </article>
   );

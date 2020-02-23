@@ -19,6 +19,9 @@ $appointment-height: 11rem;
         @include button-active--opacity;
       }
     }
+    &-red {
+      border: 1px solid red;
+    }
   }
 
   &__time {
@@ -140,9 +143,28 @@ $appointment-height: 11rem;
     width: 100%;
 
     &:focus {
-      outline: none;
+      outline: turquoise;
     }
+    
   }
+  &__nuhuh {
+    background-color: $dark-background;
+    border: 0;
+    border-bottom: 1px solid red;
+    color: $white;
+    font-size: 1.5rem;
+    height: 2rem;
+    margin-bottom: 0.25rem;
+    width: 100%;
+
+    &:focus {
+      outline: turquoise;
+    }
+    
+  }
+  
+
+  
 
   &__status-image {
     margin-right: 2rem;

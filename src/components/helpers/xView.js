@@ -10,7 +10,8 @@ const v = {
   EDIT: 'EDIT',
   UPDATING: 'UPDATING',
   ERROR_UPDATING: 'ERROR_UPDATE',
-  EMPTY_SAVING: 'EMPTY_SAVING'
+  EMPTY_SAVING: 'EMPTY_SAVING',
+  OOPS: 'OOPS'
 
 }
 module.exports = { v };
