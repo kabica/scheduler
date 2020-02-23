@@ -11,7 +11,7 @@ Using the latest tools and techniques, this project builds and tests a React app
     <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="120" height="50">
     <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="120" height="50">
     <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="180" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/webpack.jpg?raw=true" alt="Logo" width="140" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/webpack.png?raw=true" alt="Logo" width="80" height="80">
   </a>
 </p>
 
