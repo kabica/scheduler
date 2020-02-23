@@ -1,7 +1,7 @@
 import axios from 'axios';
 import  { useEffect, useReducer } from "react";
-const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 const { v } = require('components/helpers/helperData.js');
+const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
 //USED TO AUTO-SELECT THE CURRENT DAY ON INITIAL PAGE LOAD 
 const initial = {
@@ -14,11 +14,8 @@ const initial = {
 // USE STATE.DAY DEFAULT VALUE (above) TO GET TODAY OBJECT
 const getToday = function (today, days) {
   for( const day of days) {
-    if(day.name === today){
-      return (day.id - 1)
-    }
-  }
-  };
+    if(day.name === today) return (day.id - 1)
+  }};
 
 // LOOKUP OBJECT FOR STATE UPDATE 
 const reduxObj = {
@@ -35,7 +32,7 @@ const reduxObj = {
     const ID = action.id;
     const days = [ ...state.days ];
     const todayID = getToday(state.day, state.days);
-    const before = state.appointments[ID].interview;
+    let before = state.appointments[ID].interview;
 
     const appointments = {
       ...state.appointments,

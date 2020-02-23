@@ -41,7 +41,8 @@ export default function Form(props) {
         /*
           // THIS IS A CONTROLLED COMPONENT:
           // value={stae.name || ''} ensures that on initial render, name is never undefined and therefore
-          // ensures that value is always a controlled component. The onChange would throw an error when value 
+          // ensures that value is always a controlled value within a controlled component. The onChange 
+             would throw an error when value 
           // becomes a controlled component again once a user types 
         */
       />
