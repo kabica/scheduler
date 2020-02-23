@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "components/Appointment/styles.scss";
 import Show from 'components/Appointment/Show';
 import Form from 'components/Appointment/Form';
@@ -57,6 +57,14 @@ export default function Appointment(props) {
       transition(v.ERROR_UPDATE)
     )
   };
+  useEffect(() => {
+    if (props.interview && mode === v.EMPTY) {
+        transition(v.SHOW);
+    }
+    if (props.interview === null && mode === v.SHOW) {
+     transition(v.EMPTY);
+    }
+   }, [props.interview, transition, mode]);
   
   return (
   <article className="appointment">
