@@ -32,10 +32,10 @@ const reduxObj = {
     return { ...state, appointments:action.appointments, days:action.days  };
   },
   setAsync : (state , action) => {
-    let spots = 0;
     const ID = action.id;
     const days = [ ...state.days ];
     const todayID = getToday(state.day, state.days);
+    const before = state.appointments[ID].interview;
 
     const appointments = {
       ...state.appointments,
@@ -44,18 +44,11 @@ const reduxObj = {
       interview: action.interview ? { ...action.interview } : null
       }
     };
-    
-    const todayApps = days[todayID].appointments;
-    todayApps.forEach(app => {
-      let current = appointments[app]
-      if (!current.interview || !Object.keys(current.interview).length) {
-        spots++;
-      }
-    });
 
+    let current = state.days[todayID].spots;
     days[todayID] = {
       ...state.days[todayID],
-      spots: spots
+      spots: before && action.interview ? current : !before ? --current : ++current
     };
 
     return { ...state, appointments:appointments, days:days};

@@ -1,5 +1,5 @@
 import  React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'components/Button/Button';
 import InterviewerList from 'components/InterviewerList/InterviewerList';
 
@@ -22,6 +22,10 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  useEffect(()=> {
+    console.log('used!')
+
+  })
 
   return (
     <main className="appointment__card appointment__card--create">
