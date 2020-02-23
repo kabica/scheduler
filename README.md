@@ -37,10 +37,6 @@ Using the latest tools and techniques, this project builds and tests a React app
 - See below for further deatils :) 
 
 
-
-
-## Interview Scheduler
-
 ## Setup
 
 Install dependencies with `npm install`.
