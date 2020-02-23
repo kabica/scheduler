@@ -6,7 +6,7 @@ Using the latest tools and techniques, this project builds and tests a React app
 ## Final Product
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/kabica/tinyapp/a8b198b7a75ba0d6bdb22b4ab9e047992cf93880/screenshots/Screen%20Shot%202020-01-23%20at%205.06.52%20PM.png" alt="Logo" width="80" height="80">
   </a>
 </p>
 
