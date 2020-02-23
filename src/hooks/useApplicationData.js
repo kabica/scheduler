@@ -67,7 +67,7 @@ const reducer = (state, action) => {
   return reduxObj[action.type] ? reduxObj[action.type](state, action.value) : state
 };
 
-// PRIMARY COMPONENT -- useEffect : RESPONSIBLE FOR INITIAL STATE UPDATE  socket: RESPONSIBLE FOR ASYNC UPDATE
+// PRIMARY COMPONENT RESPONSIBILTIES = useEffect : INITIAL STATE UPDATE + socket: ASYNC UPDATE
 export default function useApplicationData() {
   const [state, dispatchState] = useReducer(reducer, initial);
 
