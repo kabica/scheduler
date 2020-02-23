@@ -6,7 +6,7 @@ Using the latest tools and techniques, this project builds and tests a React app
 
 ## Powered by
 
-<p align="center">
+<p align="center" width="90%">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
     <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="120" height="50">
