@@ -7,7 +7,9 @@ Using the latest tools and techniques, this project builds and tests a React app
 
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="80" height="80">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="75" height="40">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/babel.jpg?raw=true" alt="Logo" width="75" height="40">
   </a>
 </p>
 
