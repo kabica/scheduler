@@ -8,11 +8,13 @@ Using the latest tools and techniques, this project builds and tests a React app
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="90" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="100" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="130" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="120" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="120" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="180" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/webpack.jpg?raw=true" alt="Logo" width="140" height="50">
   </a>
 </p>
+
 
 ## Dependencies + Tech Specs.
 
