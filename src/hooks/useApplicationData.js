@@ -1,20 +1,26 @@
 import axios from 'axios';
 import  { useEffect, useReducer } from "react";
+const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+const { v } = require('components/helpers/helperData.js');
 
 //USED TO AUTO-SELECT THE CURRENT DAY ON INITIAL PAGE LOAD 
-const today = new Date();
-const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const SET_APPLICATION = "setApplication";
-const SET_INTERVIEW = "setInterview";
-const SET_DAY = "setDay";
-
 const initial = {
-  day: week[ today.getDay() ],
+  day: v.week[ v.today.getDay() ],
   days: [],
   appointments: {},
   interviewers: {}
 };
 
+// USE STATE.DAY DEFAULT VALUE (above) TO GET TODAY OBJECT
+const getToday = function (today, days) {
+  for( const day of days) {
+    if(day.name === today){
+      return (day.id - 1)
+    }
+  }
+  };
+
+// LOOKUP OBJECT FOR STATE UPDATE 
 const reduxObj = {
   setDay : (state, action) => {
     return { ...state, day: action.day};
@@ -24,49 +30,70 @@ const reduxObj = {
   },
   setInterview : (state , action) => {
     return { ...state, appointments:action.appointments, days:action.days  };
-  }
-};
-const reducer = (state, action) => {
-  if (reduxObj[action.type]) {
-    return reduxObj[action.type](state, action.value);
-  } else {
-    return state;
+  },
+  setAsync : (state , action) => {
+    let spots = 0;
+    const ID = action.id;
+    const days = [ ...state.days ];
+    const todayID = getToday(state.day, state.days);
+
+    const appointments = {
+      ...state.appointments,
+      [ID]: {
+      ...state.appointments[ID],
+      interview: action.interview ? { ...action.interview } : null
+      }
+    };
+    
+    const todayApps = days[todayID].appointments;
+    todayApps.forEach(app => {
+      let current = appointments[app]
+      if (!current.interview || !Object.keys(current.interview).length) {
+        spots++;
+      }
+    });
+
+    days[todayID] = {
+      ...state.days[todayID],
+      spots: spots
+    };
+
+    return { ...state, appointments:appointments, days:days};
   }
 };
 
+// REDUCER FOR STATE UPDATE via LOOKUP
+const reducer = (state, action) => {
+  return reduxObj[action.type] ? reduxObj[action.type](state, action.value) : state
+};
+
+// PRIMARY COMPONENT -- useEffect : RESPONSIBLE FOR INITIAL STATE UPDATE  socket: RESPONSIBLE FOR ASYNC UPDATE
 export default function useApplicationData() {
   const [state, dispatchState] = useReducer(reducer, initial);
 
-  const setDay = function(day) {
-    dispatchState({type: SET_DAY , value: {day}})
-  }
-
-  // RESPONSIBLE FOR INITIAL STATE UPDATE ON SERVER LOAD 
   useEffect(() => {
-    const promise1 = axios.get("/api/days");
-    const promise2 = axios.get("/api/appointments");
-    const promise3 = axios.get("/api/interviewers");
+    socket.onmessage = event => {
+      console.log(`Message Received: ${event.data}`);
+      const fromServer = JSON.parse(event.data)
+      if(fromServer.type === "SET_INTERVIEW") {
+        const id = fromServer.id;
+        const interview = fromServer.interview
+        dispatchState({ type: v.SET_ASYNC , value: { interview, id}})
+      }
+    }; socket.send('ping');
 
     Promise.all([
-      Promise.resolve(promise1),
-      Promise.resolve(promise2),
-      Promise.resolve(promise3),
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+      Promise.resolve(axios.get("/api/interviewers")),
     ])
     .then((all) => {
       const days = all[0].data;
       const appointments = all[1].data;
       const interviewers = all[2].data;
-      dispatchState({ type: SET_APPLICATION , value: { days, appointments, interviewers}})});
+      dispatchState({ type: v.SET_APPLICATION , value: { days, appointments, interviewers}})});
   }, []);
 
-  // USE STATE.DAY DEFAULT VALUE (above) TO GET TODAY OBJECT
-  const getToday = function (today, days) {
-  for( const day of days) {
-    if(day.name === today){
-      return (day.id - 1)
-    }
-  }
-  };
 
   // SAVE NEW INTERVIEW TO DB - POPULATE APPOINTMENT OBJECT 
   const bookInterview = function(id, interview) {
@@ -74,45 +101,19 @@ export default function useApplicationData() {
       ...state.appointments[id],
       interview: { ...interview }
     };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    const todayID = getToday(state.day, state.days);
-    const day = {
-      ...state.days[todayID],
-      spots: state.days[todayID]['spots'] - 1
-    }; state.days[todayID] = day;
-
-    const days = [...state.days]
     return Promise.resolve(
       axios.put(`/api/appointments/${id}`, appointment)
-      .then(dispatchState({ type: SET_INTERVIEW , value: { appointments, days}}))
     );
-};
-
-const cancelInterview = function (ID) {
-  const appointment = {
-    ...state.appointments[ID],
-    interview: null
   };
-  const appointments = {
-    ...state.appointments,
-    [ID]: appointment
+
+  // DELETE EXISTING INTERVIEW FROM DB -- webSocket will ASYNC UPDATE UI
+  const cancelInterview = function (ID) {
+    return Promise.resolve(axios.delete(`/api/appointments/${ID}`));
   };
-  const dayID = getToday(state.day, state.days);
-  const day = {
-    ...state.days[dayID],
-    spots: state.days[dayID]['spots'] + 1
-  }; 
 
-  state.days[dayID] = day;
-  const days = [...state.days];
-
-  return Promise.resolve(axios.delete(`/api/appointments/${ID}`)
-    .then(dispatchState({ type: SET_INTERVIEW , value: { appointments, days}}))
-    );
-};
+  const setDay = function(day) {
+    dispatchState({type: v.SET_DAY , value: {day}})
+  }
 
  return { state, setDay, bookInterview, cancelInterview };
 };

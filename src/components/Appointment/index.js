@@ -12,7 +12,7 @@ import useVisualMode from "hooks/useVisualMode";
 
 // CONSTANTS HAVE BEEN REFACTORED TO SEPARATE FILE FOR CLEANLINESS
 // SHORT VAR NAME WAS USED (v) TO MAINTAIN READABILITY
-const { v } = require('../helpers/xView.js');
+const { v } = require('components/helpers/helperData.js');
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(

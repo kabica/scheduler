@@ -11,7 +11,12 @@ const v = {
   UPDATING: 'UPDATING',
   ERROR_UPDATING: 'ERROR_UPDATE',
   EMPTY_SAVING: 'EMPTY_SAVING',
-  OOPS: 'OOPS'
+  OOPS: 'OOPS',
+  SET_APPLICATION: 'setApplication', 
+  SET_ASYNC: 'setAsync',
+  SET_DAY: 'setDay',
+  week: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 
+  today: new Date()
 
 }
 module.exports = { v };
