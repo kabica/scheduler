@@ -17,7 +17,11 @@ const getToday = function (today, days) {
     if(day.name === today) return (day.id - 1)
   }};
 
-// LOOKUP OBJECT FOR STATE UPDATE 
+// LOOKUP OBJECT FOR STATE UPDATE
+// Before captures the value of interview before the websocket-triggered state update (null || {interview})
+//    if(Before = null && After = {interview}) --> New appointment added, decrease spots by 1
+//    if(Before = {interview} && After = {interview}) --> Appointment updated, no change to spots 
+//    if(Before = {interview}) && After = null) --> Exisiting appointment deleted, increase spots by 1
 const reduxObj = {
   setDay : (state, action) => {
     return { ...state, day: action.day};
@@ -56,6 +60,7 @@ const reduxObj = {
 const reducer = (state, action) => {
   return reduxObj[action.type] ? reduxObj[action.type](state, action.value) : state
 };
+
 
 // PRIMARY COMPONENT RESPONSIBILTIES = useEffect : INITIAL STATE UPDATE + socket: ASYNC UPDATE
 export default function useApplicationData() {

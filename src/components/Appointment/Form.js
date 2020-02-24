@@ -22,11 +22,6 @@ export default function Form(props) {
     props.onCancel();
   };
 
-  useEffect(()=> {
-    console.log('used!')
-
-  })
-
   return (
     <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
@@ -52,7 +47,7 @@ export default function Form(props) {
     <section className="appointment__card-right">
       <section className="appointment__actions">
         <Button onClick={cancel} danger>Cancel</Button>
-        <Button onClick={state.valid && state.interviewer ? () => props.onSave(state.name, state.interviewer) : null}confirm>Save</Button>
+        <Button onClick={state.name && state.interviewer ? () => props.onSave(state.name, state.interviewer) : null}confirm>Save</Button>
       </section>
     </section>
     </main>
