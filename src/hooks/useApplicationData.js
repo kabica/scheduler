@@ -3,6 +3,7 @@ import  { useEffect, useReducer } from "react";
 const { v } = require('components/helpers/helperData.js');
 const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
+
 //USED TO AUTO-SELECT THE CURRENT DAY ON INITIAL PAGE LOAD 
 const initial = {
   day: v.week[ v.today.getDay() ],
@@ -61,7 +62,6 @@ const reducer = (state, action) => {
   return reduxObj[action.type] ? reduxObj[action.type](state, action.value) : state
 };
 
-
 // PRIMARY COMPONENT RESPONSIBILTIES = useEffect : INITIAL STATE UPDATE + socket: ASYNC UPDATE
 export default function useApplicationData() {
   const [state, dispatchState] = useReducer(reducer, initial);
@@ -75,8 +75,7 @@ export default function useApplicationData() {
         const interview = fromServer.interview
         dispatchState({ type: v.SET_ASYNC , value: { interview, id}})
       }
-    }; socket.send('ping');
-
+    };
     Promise.all([
       Promise.resolve(axios.get("/api/days")),
       Promise.resolve(axios.get("/api/appointments")),
@@ -90,6 +89,7 @@ export default function useApplicationData() {
   }, []);
 
 
+
   // SAVE NEW INTERVIEW TO DB - POPULATE APPOINTMENT OBJECT 
   const bookInterview = function(id, interview) {
     const appointment = {
@@ -100,6 +100,7 @@ export default function useApplicationData() {
       axios.put(`/api/appointments/${id}`, appointment)
     );
   };
+
 
   // DELETE EXISTING INTERVIEW FROM DB -- webSocket will ASYNC UPDATE UI
   const cancelInterview = function (ID) {

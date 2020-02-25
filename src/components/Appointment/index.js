@@ -21,6 +21,7 @@ export default function Appointment(props) {
 
   // CREATE NEW APPOINTMENT -- Display error for empty input field
   function save(name, interviewer) {
+    console.log('HERE : ', interviewer)
     const interview = {
       student: name,
       interviewer
@@ -67,7 +68,7 @@ export default function Appointment(props) {
    }, [props.interview, transition, mode]);
   
   return (
-  <article className="appointment">
+  <article className="appointment" data-testid="appointment">
     <Header time={props.time} />  
     {mode === v.EMPTY && (<Empty onAdd={() => transition(v.CREATE)} />)}
     {mode === v.SHOW && (

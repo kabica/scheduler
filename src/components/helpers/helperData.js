@@ -16,7 +16,6 @@ const v = {
   SET_ASYNC: 'setAsync',
   SET_DAY: 'setDay',
   week: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 
-  today: new Date()
-
+  today: new Date(),
 }
 module.exports = { v };
