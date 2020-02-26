@@ -107,7 +107,7 @@ export default function useApplicationData() {
     return Promise.resolve(axios.delete(`/api/appointments/${ID}`));
   };
 
-  const setDay = function(day) {
+  const setDay = function(day) { 
     dispatchState({type: v.SET_DAY , value: {day}})
   }
 

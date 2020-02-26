@@ -24,8 +24,9 @@ export default function Appointment(props) {
     console.log('HERE : ', interviewer)
     const interview = {
       student: name,
-      interviewer
+      interviewer: interviewer
     };
+    console.log('INT : ', interview)
     transition(v.SAVING);
     props
       .bookInterview(props.id, interview)
@@ -35,10 +36,6 @@ export default function Appointment(props) {
       );
   };
 
-
-  let name = 'cara';
-  let length = name.length //4
- 
   // REMOVE AN ALREADY EXISTING APPOINTMENT
   function cancel() {
     transition(v.DELETING, true)
@@ -75,10 +72,10 @@ export default function Appointment(props) {
   <article className="appointment" data-testid="appointment">
     <Header time={props.time} />  
     {mode === v.EMPTY && (<Empty onAdd={() => transition(v.CREATE)} />)}
-    {mode === v.SHOW && (
+    {mode === v.SHOW && props.interview && (
     <Show
-      student={props.interview.student || ''}
-      interviewer={props.interview.interviewer || ''}
+      student={props.interview.student}
+      interviewer={props.interview.interviewer}
       onEdit={() => transition(v.EDIT)}
       onDelete={() => transition(v.CONFIRM)}
     />
@@ -142,14 +139,6 @@ export default function Appointment(props) {
     <Error
       message='Error during delete'
       onClose={() => transition(v.SHOW)}
-    />
-    )}
-    {mode === v.OOPS && (
-    <Form
-      error={1}
-      onSave={save}
-      interviewers={props.interviewers}
-      onCancel = {() => back()}
     />
     )}
   
