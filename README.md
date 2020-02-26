@@ -1,8 +1,10 @@
-#
+
 # Interview Scheduler 
 
 Using the latest tools and techniques, this project builds and tests a React application that allows users to book and cancel interviews, which combines a concise API with a WebSocket server to build a realtime experience.
 **Voila!** 
+
+When the page is requested by a user, axios delivers persisted data in the form of available (or booked!) appointment spots for each day. The list of day can be easily navigated by touch or click, which will display the days specific availability -- sneak peak below if patience is null. When an appointment is booked, the webSocket will adjust all connect users to reflect your cool new appointment! 
 
 ## Powered by
 
