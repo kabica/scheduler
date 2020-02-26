@@ -9,26 +9,44 @@ Using the latest tools and techniques, this project builds and tests a React app
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="120" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="120" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="180" height="50">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/webpack.png?raw=true" alt="Logo" width="80" height="80">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="160" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="160" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="220" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/webpack.png?raw=true" alt="Logo" width="85" height="80">
   </a>
 </p>
 
 
-## Technical Specs.
+## Technical Specifications
 
-    ✖️ NodeJS + React
-    ✖️ Webpack + Babel
-    ✖️ Axios + Websockets
-    ✖️ Storybook + Webpack Dev Server
-    ✖️ Jest + Testing Library 
-    ✖️ Cypress Web Testing
+  - ✖️ NodeJS + React
+  - ✖️ Webpack + Babel
+  - ✖️ Axios + Websockets
+  - ✖️ Storybook + Webpack Dev Server
+  - ✖️ Jest + Testing Library 
+  - ✖️ Cypress Web Testing
 
 
-###
 
+
+## Dependencies
+
+    ✖️ axios ^0.19.2
+    ✖️ classnames ^2.2.6
+    ✖️ normalize.css ^8.0.1
+    ✖️ react ^16.9.0
+    ✖️ react-dom ^16.9.0
+    ✖️ react-scripts 3.0.0
+
+
+## Sneak-Peak
+<p align="center">
+  <a href="https://github.com/kabica/scheduler">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="160" height="50">
+  
+  </a>
+</p>
 
 
 # Getting Started
