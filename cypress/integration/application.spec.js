@@ -5,17 +5,19 @@ describe('Landing page' , () => {
     cy.visit('/')
   })
 
-  
+  // VISIT THE LANDING PAGE 
   it("user can visit landing page", () => {
     cy.visit("/");
   });
 
+  // SELECT A DAY FROM THE AVAILIABLE LIST 
   it("User can select Tuesday", () => {
     cy.contains("[data-testid=day]", "Tuesday")
       .click()
       .should("have.class", "day-list__item--selected")
   });
 
+  // CREATE A NEW APPOINTMENT 
   it('User can create an appointment' , () => {
     cy.get('[alt="Add"]')
       .first()
@@ -38,6 +40,7 @@ describe('Landing page' , () => {
       .wait(250)
   })
 
+  // EDIT AN EXISTING APPOINTMENT 
   it('User can edit an interview' , () => {
     cy.get('.appointment__card--show')
       .first()
@@ -74,6 +77,7 @@ describe('Landing page' , () => {
       .wait(250)
   })
 
+  // DELETE AN EXISITING APPOINTMENT 
   it('User can  delete an existing appointment', () => {
     cy.get('.appointment__card--show')
       .first()

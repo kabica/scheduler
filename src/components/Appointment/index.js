@@ -55,18 +55,16 @@ export default function Appointment(props) {
     transition(v.UPDATING)
     props.bookInterview(props.id, interview)
     .then(() => transition(v.SHOW))
-    .catch(() => 
-      transition(v.ERROR_UPDATE)
-    )
+    .catch(() => transition(v.ERROR_UPDATE))
   };
-  useEffect(() => {
-    if (props.interview && mode === v.EMPTY) {
-        transition(v.SHOW);
-    }
-    if (props.interview === null && mode === v.SHOW) {
-     transition(v.EMPTY);
-    }
-   }, [props.interview, transition, mode]);
+  // useEffect(() => {
+  //   if (props.interview && mode === v.EMPTY) {
+  //       transition(v.SHOW);
+  //   }
+  //   if (props.interview === null && mode === v.SHOW) {
+  //    transition(v.EMPTY);
+  //   }
+  //  }, [props.interview, transition, mode]);
   
   return (
   <article className="appointment" data-testid="appointment">

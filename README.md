@@ -17,13 +17,14 @@ Using the latest tools and techniques, this project builds and tests a React app
 </p>
 
 
-## Dependencies + Tech Specs.
+## Technical Specs.
 
-- React
-- Webpack + Babel
-- Axios + Websockets
-- Storybook + Webpack Dev Server
-- Jest + Testing Library 
+    ✖️ NodeJS + React
+    ✖️ Webpack + Babel
+    ✖️ Axios + Websockets
+    ✖️ Storybook + Webpack Dev Server
+    ✖️ Jest + Testing Library 
+    ✖️ Cypress Web Testing
 
 
 ###
