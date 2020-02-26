@@ -42,8 +42,8 @@ Using the latest tools and techniques, this project builds and tests a React app
 ## Sneak-Peak
 <p align="center">
   <a href="https://github.com/kabica/scheduler">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="160" height="50">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/1.png?raw=true" alt="">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/2.png?raw=true" alt="">
   
   </a>
 </p>
