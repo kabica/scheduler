@@ -4,13 +4,13 @@
 Using the latest tools and techniques, this project builds and tests a React application that allows users to book and cancel interviews, which combines a concise API with a WebSocket server to build a realtime experience.
 **Voila!** 
 
-When the page is requested by a user, axios delivers persisted data in the form of available (or booked!) appointment spots for each day. The list of day can be easily navigated by touch or click, which will display the days specific availability -- sneak peak below if patience is null. When an appointment is booked, the webSocket will adjust all connect users to reflect your cool new appointment! 
+When the page is requested by a user, axios delivers persisted data in the form of available (or booked!) appointment spots for each day. The list of days can be easily navigated by touch or click, which will display that days specific availability -- sneak peak below if patience is null. When an appointment is booked, the webSocket will adjust all connected users to reflect your newly booked appointment!
 
 ## Powered by
 
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="60" height="60">
+    <img src="https://github.com/kabica/scheduler/blob/master/img/node.png?raw=true" alt="Logo" width="100" height="100">
     <img src="https://github.com/kabica/scheduler/blob/master/img/axis.png?raw=true" alt="Logo" width="160" height="50">
     <img src="https://github.com/kabica/scheduler/blob/master/img/reactL.png?raw=true" alt="Logo" width="160" height="50">
     <img src="https://github.com/kabica/scheduler/blob/master/img/storybook.png?raw=true" alt="Logo" width="220" height="50">
