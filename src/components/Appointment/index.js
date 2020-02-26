@@ -35,6 +35,10 @@ export default function Appointment(props) {
       );
   };
 
+
+  let name = 'cara';
+  let length = name.length //4
+ 
   // REMOVE AN ALREADY EXISTING APPOINTMENT
   function cancel() {
     transition(v.DELETING, true)
@@ -73,9 +77,8 @@ export default function Appointment(props) {
     {mode === v.EMPTY && (<Empty onAdd={() => transition(v.CREATE)} />)}
     {mode === v.SHOW && (
     <Show
-      error={0}
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
+      student={props.interview.student || ''}
+      interviewer={props.interview.interviewer || ''}
       onEdit={() => transition(v.EDIT)}
       onDelete={() => transition(v.CONFIRM)}
     />

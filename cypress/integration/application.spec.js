@@ -4,6 +4,8 @@ describe('Landing page' , () => {
     cy.request("GET", "/api/debug/reset");
     cy.visit('/')
   })
+
+  
   it("user can visit landing page", () => {
     cy.visit("/");
   });
