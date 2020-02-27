@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "components/Appointment/Form";
-import { render, cleanup , fireEvent} from "@testing-library/react";
+import { render, cleanup , fireEvent, getByAltText} from "@testing-library/react";
 
 
 
@@ -17,16 +17,17 @@ describe("Form", () => {
 
   it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
-      <Form interviewers={interviewers} />
+      <Form interviewers={interviewers}/>
     );
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
   });
 
+
   it("renders with initial student name", () => {
-    const { getByTestId } = render(
-      <Form interviewers={interviewers} name="Lydia Miller-Jones" />
+    const { getByPlaceholderText } = render(
+      <Form interviewers={interviewers} name="" />
     );
-    expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
+    expect(getByPlaceholderText("Enter Student Name")).toHaveValue("Lydia Miller-Jones");
   });
 
   it("validates that the student name is not blank", () => {
@@ -53,14 +54,14 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
 
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-      target: { value: "Lydia Miller-Jones" }
+      target: { value: "Lydia Miller-Jones1" }
     });
 
     fireEvent.click(getByText("Save"));
 
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
 
-    expect(onSave).toHaveBeenCalledTimes(1);
+    expect(onSave).toHaveBeenCalledTimes(0);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
 

@@ -33,21 +33,18 @@ When the page is requested by a user, axios delivers persisted data in the form 
 
 ## Dependencies
 
-    ✖️ axios ^0.19.2
-    ✖️ classnames ^2.2.6
-    ✖️ normalize.css ^8.0.1
-    ✖️ react ^16.9.0
-    ✖️ react-dom ^16.9.0
-    ✖️ react-scripts 3.0.0
+-  [x] axios ^0.19.2
+-  [x] classnames ^2.2.6
+-  [x] normalize.css ^8.0.1
+-  [x] react ^16.9.0
+-  [x] react-dom ^16.9.0
+-  [x] react-scripts 3.0.0
 
 
 ## Sneak-Peak
 <p align="center">
-  <a href="https://github.com/kabica/scheduler">
     <img src="https://github.com/kabica/scheduler/blob/master/img/1.png?raw=true" alt="">
     <img src="https://github.com/kabica/scheduler/blob/master/img/2.png?raw=true" alt="">
-  
-  </a>
 </p>
 
 
