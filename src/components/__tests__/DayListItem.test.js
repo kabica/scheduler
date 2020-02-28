@@ -15,6 +15,6 @@ it("displays 'no spots remaining' when the spot count is zero", () => {
 
 it("renders '5 spots remaining' when the spot count is five", () => {
   const { getByText } = render(<DayListItem name="Monday" spots={5} />);
-  expect(getByText("1 spot remaining")).toBeInTheDocument();
+  expect(getByText("5 spots remaining")).toBeInTheDocument();
 });
 

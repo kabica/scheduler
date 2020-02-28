@@ -1,5 +1,5 @@
-
-describe('Landing page' , () => {
+// application.spec.js
+describe('Site navigation and interaction...' , () => {
   before(() => {
     cy.request("GET", "/api/debug/reset");
     cy.visit('/')
@@ -95,7 +95,7 @@ describe('Landing page' , () => {
       .contains('Confirm')
       .click()
   })
-})
+});
 
 
 

@@ -1,4 +1,4 @@
-import  React  from 'react';
+import  React, { useEffect }  from 'react';
 import { useState } from 'react';
 import Button from 'components/Button/Button';
 import InterviewerList from 'components/InterviewerList/InterviewerList';
@@ -29,7 +29,6 @@ export default function Form(props) {
 
   // FORM INPUT VALIDATION OCCURS HERE
   const validate = function() {
-    console.log('STATE : ', state)
     if(!state.name && !state.interviewer) {
       return setState(state => ({...state, error: n_err, int_error: i_err}));
     }
@@ -42,6 +41,11 @@ export default function Form(props) {
     return props.onSave(state.name, state.interviewer);
   };
 
+  // SET INITAL STATE ON RENDER 
+  useEffect(() => {
+    reset();
+  }, [])
+
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -51,17 +55,11 @@ export default function Form(props) {
         className={!state.error || state.valid ? "appointment__create-input text--semi-bold" : "appointment__nuhuh"}
         name="name"
         value={state.name || ""}
-        onChange={(event) => {setState({...state, name: event.target.value, valid: event.target.value.length ? true : false, error: ''})}}
+        onChange={(event) => {
+          setState({...state, name: event.target.value,valid: event.target.value.length ? true : false, error: ''})}}
         type="text"
         placeholder="Enter Student Name"
         data-testid="student-name-input"
-        /*
-          // THIS IS A CONTROLLED COMPONENT:
-          // value={state.name || ''} ensures that on initial render, name is never undefined and therefore
-          // ensures that value is always a controlled value within a controlled component. The onChange 
-             would throw an error when value 
-          // becomes a controlled component again once a user types 
-        */
       />
       </form>
       <section className="appointment__validation">{state.error}</section>
